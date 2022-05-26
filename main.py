@@ -1,3 +1,4 @@
+from os import remove
 from turtle import *
 from freegames import square, vector
 from time import sleep
@@ -32,17 +33,13 @@ print()
 
 #------------Script para fazer o usuario escolhe a cor do personagem------------#
 colors = ['red', 'green', 'blue', 'black', 'orange', 'pink', 'gray', 'purple']
-count = 0
-lenght = len(colors) - 1
 colorPlayer1 = input(f"Escolha a cor do Player 1: {colors} ")
+colors.remove(colorPlayer1)
 colorPlayer2 = input(f"Escolha a cor do Player 2: {colors} ")
+colors.remove(colorPlayer2)
 colorPlayer3 = input(f"Escolha a cor do Player 3: {colors} ")
-    
-while(count <= lenght):
-    if(colors[count] == colorPlayer1):
-        square(p1xy.x, p1xy.y, 3, colors[count])
-        break
-    count += 1
+colors.remove(colorPlayer3)
+
 
 #------------Temporizador para inicio do jogo------------#
 sleep(1)
@@ -59,6 +56,7 @@ print("GO!")
 #-----------Define os movimentos dos players-------------#
 def draw():
     """Advance players and draw game."""
+    
     p1xy.move(p1aim)
     p1head = p1xy.copy()
 
@@ -68,46 +66,45 @@ def draw():
     p3xy.move(p3aim)
     p3head = p3xy.copy()
 
-
-    
-
 #------------Colisão dos players entre eles------------#
     if not inside(p1head) or p1head in p2body:
-        print(f"Player {colorPlayer2} and {colorPlayer3} wins!")
-        return
-
+        print(f"Player {colorPlayer2} and {colorPlayer3} Ganharam!")
+        
+        
+        
+    
     if not inside(p1head) or p1head in p3body:
-        print(f"Player {colorPlayer2} and {colorPlayer3} wins!")
+        print(f"Player {colorPlayer2} and {colorPlayer3} Ganharam!")
         return
 
     if not inside(p2head) or p2head in p1body:
-        print(f"Player {colorPlayer1} and {colorPlayer3} wins!")
+        print(f"Player {colorPlayer1} and {colorPlayer3} Ganharam!")
         return
 
     if not inside(p2head) or p2head in p3body:
-        print(f"Player {colorPlayer1} and {colorPlayer3} wins!")
+        print(f"Player {colorPlayer1} and {colorPlayer3} Ganharam!")
         return
 
     if not inside(p3head) or p3head in p1body:
-        print(f"Player {colorPlayer1} and {colorPlayer2} wins!")
+        print(f"Player {colorPlayer1} and {colorPlayer2} Ganharam!")
         return
 
     if not inside(p3head) or p3head in p2body:
-        print(f"Player {colorPlayer1} and {colorPlayer2} wins!")
+        print(f"Player {colorPlayer1} and {colorPlayer2} Ganharam!")
         return
 
     
 #------------Colisão do player em si mesmo------------#
     if not inside(p1head) or p1head in p1body:
-        print(f"Player {colorPlayer2} and {colorPlayer3} wins!")
+        print(f"Player {colorPlayer2} and {colorPlayer3} Ganharam!")
         return
 
     if not inside(p2head) or p2head in p2body:
-        print(f"Player {colorPlayer1} and {colorPlayer3} wins!")
+        print(f"Player {colorPlayer1} and {colorPlayer3} Ganharam!")
         return
 
     if not inside(p3head) or p3head in p3body:
-        print(f"Player {colorPlayer1} and {colorPlayer2} wins!")
+        print(f"Player {colorPlayer1} and {colorPlayer2} Ganharam!")
         return
 
 #-----------Adiciona o 'corpo' a 'cabeça'-------------#
@@ -143,4 +140,4 @@ done()
 #Colisão entre os players e entre eles mesmos
 #Adicionado um Temporizador para começar o jogo.
 #Boost de velocidade - Não feito
-#Imagem de fundo - Não feito
+#Imagem de fundo - Apenas feito para mudar a cor do fundo.
